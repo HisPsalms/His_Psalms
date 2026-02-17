@@ -26,8 +26,8 @@
     }
 
     .header-graffiti {
-      max-width: 300px;
-      width: 80%;
+      max-width: 250px;
+      width: 100%;
       height: auto;
       display: block;
       margin: 0 auto;
@@ -36,7 +36,6 @@
     /* Hide images by default */
     .light-only { display: none; }
     .dark-only { display: none; }
-
     body.light .light-only { display: block; }
     body.light .dark-only { display: none; }
     body.dark .dark-only { display: block; }
@@ -71,14 +70,12 @@
     .socials { display:flex; justify-content:center; gap:2rem; margin-top:2rem; }
     .socials a {
       font-size:2rem;
-      background: linear-gradient(135deg, #d4af37, #c0c0c0);
-      -webkit-background-clip:text;
-      -webkit-text-fill-color:transparent;
       animation: float 3s ease-in-out infinite;
       transition: transform 0.3s ease, text-shadow 0.3s ease, background 0.5s;
     }
-    .socials a:hover { transform:translateY(-5px); text-shadow:0 0 15px rgba(212,175,55,0.6); }
-    @keyframes float {0%,100%{transform:translateY(0);}50%{transform:translateY(-10px);}}
+    .socials a:hover { transform:translateY(-5px); }
+
+    @keyframes float {0%,100%{transform:translateY(0);}50%{transform:translateY(-10px);} }
 
     /* Toggle Button */
     #mode-toggle {
@@ -108,9 +105,9 @@
     body.dark section h2 { color:#d4af37; border-left-color:#c0c0c0; }
     body.dark .video-section p { color:#d4af37; }
     body.dark .video-section video { background:#000; box-shadow:0 0 20px rgba(212,175,55,0.4); }
-    body.dark .socials a { background: linear-gradient(135deg,#d4af37,#c0c0c0); -webkit-background-clip:text; -webkit-text-fill-color:transparent; }
+    body.dark .socials a { background: linear-gradient(135deg,#d4af37,#c0c0c0); -webkit-background-clip:text; -webkit-text-fill-color:transparent; text-shadow:0 0 15px rgba(212,175,55,0.6);}
     body.dark footer { background:#111; color:#888; border-top-color:rgba(192,192,192,0.3); }
-    body.dark #mode-toggle { background:#d4af37; color:#0a0a0a; }
+    body.dark #mode-toggle { background:#a8987c; color:#0a0a0a; }
 
     /* Light mode */
     body.light {
@@ -121,7 +118,12 @@
     body.light section h2 { color:#D3BE93; border-left-color:#E3C89C; }
     body.light .video-section p { color:#D3BE93; }
     body.light .video-section video { background:#E3D4AE; box-shadow:0 0 20px rgba(192,192,192,0.5); }
-    body.light .socials a { background: silver; -webkit-background-clip:text; -webkit-text-fill-color:transparent; text-shadow:0 0 3px #aaa; }
+    body.light .socials a {
+      background: linear-gradient(135deg, silver, #555);
+      -webkit-background-clip:text;
+      -webkit-text-fill-color:transparent;
+      text-shadow: 0 0 4px #aaa;
+    }
     body.light footer { background: linear-gradient(135deg,#F2EAC7,#F2DEB6); color:#333; border-top-color: silver; }
     body.light #mode-toggle { background:silver; color:#333; }
   </style>
@@ -198,6 +200,7 @@
 
 </body>
 </html>
+
 
 
 
