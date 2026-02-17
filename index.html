@@ -5,7 +5,6 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>His Psalms</title>
   <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
-
   <style>
     /* Reset */
     * { margin: 0; padding: 0; box-sizing: border-box; }
@@ -16,13 +15,15 @@
       color: #f5f5f5;
       line-height: 1.6;
       overflow-x: hidden;
+      transition: background 0.5s, color 0.5s;
     }
 
     header {
       background: linear-gradient(to right, #111, #0a0a0a);
       padding: 2rem;
       text-align: center;
-      border-bottom: 2px solid rgba(255, 215, 0, 0.4);
+      border-bottom: 2px solid rgba(212,175,55,0.4);
+      transition: background 0.5s, border-color 0.5s;
     }
 
     header h1 {
@@ -37,81 +38,92 @@
 
     header p { margin-top: 0.5rem; font-size: 1.2rem; color: #aaa; }
 
-    section { padding: 3rem 1.5rem; max-width: 1000px; margin: auto; }
-
-    section h2 {
-      font-size: 2rem;
-      margin-bottom: 1rem;
-      color: #d4af37;
-      border-left: 4px solid #c0c0c0;
-      padding-left: 0.5rem;
-    }
-
-    section p { margin-bottom: 1.5rem; color: #ddd; }
+    section { padding: 3rem 1.5rem; max-width: 1000px; margin: auto; transition: color 0.5s; }
+    section h2 { font-size: 2rem; margin-bottom: 1rem; color: #d4af37; border-left: 4px solid #c0c0c0; padding-left: 0.5rem; transition: color 0.5s, border-color 0.5s; }
+    section p { margin-bottom: 1.5rem; }
 
     footer {
       text-align: center;
       padding: 1.5rem;
       background: #111;
-      border-top: 1px solid rgba(192, 192, 192, 0.3);
+      border-top: 1px solid rgba(192,192,192,0.3);
       font-size: 0.9rem;
       color: #888;
+      transition: background 0.5s, color 0.5s, border-color 0.5s;
     }
 
     /* Fade-in animations */
-    .fade-in {
-      opacity: 0;
-      transform: translateY(20px);
-      animation: fadeIn 1.5s forwards;
-    }
+    .fade-in { opacity: 0; transform: translateY(20px); animation: fadeIn 1.5s forwards; }
     @keyframes fadeIn { to { opacity: 1; transform: translateY(0); } }
 
-    /* Socials */
-    .socials {
-      display: flex;
-      justify-content: center;
-      gap: 2rem;
-      margin-top: 2rem;
-    }
+    /* Video Section */
+    .video-section { text-align: center; padding: 3rem 1.5rem; }
+    .video-section p { margin-bottom: 1rem; color: #d4af37; font-style: italic; transition: color 0.5s; }
+    .video-section video { max-width: 600px; width: 100%; border-radius: 12px; background: #000; box-shadow: 0 0 20px rgba(212,175,55,0.4); transition: background 0.5s, box-shadow 0.5s; }
 
+    /* Socials */
+    .socials { display: flex; justify-content: center; gap: 2rem; margin-top: 2rem; }
     .socials a {
       font-size: 2rem;
       background: linear-gradient(135deg, #d4af37, #c0c0c0);
       -webkit-background-clip: text;
       -webkit-text-fill-color: transparent;
       animation: float 3s ease-in-out infinite;
-      transition: transform 0.3s ease, text-shadow 0.3s ease;
+      transition: transform 0.3s ease, text-shadow 0.3s ease, background 0.5s;
+    }
+    .socials a:hover { transform: translateY(-5px); text-shadow: 0 0 15px rgba(212,175,55,0.6); }
+    @keyframes float { 0%,100%{transform:translateY(0);}50%{transform:translateY(-10px);} }
+
+    /* Toggle Button */
+    #mode-toggle {
+      position: fixed;
+      bottom: 30px;
+      right: 30px;
+      z-index: 9999;
+      width: 60px;
+      height: 60px;
+      border: none;
+      border-radius: 50%;
+      cursor: pointer;
+      font-size: 1.5rem;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      box-shadow: 0 4px 15px rgba(0,0,0,0.3);
+      transition: background 0.5s, color 0.5s;
     }
 
-    .socials a:hover { transform: translateY(-5px); text-shadow: 0 0 15px rgba(212, 175, 55, 0.6); }
-    @keyframes float { 0%, 100% { transform: translateY(0); } 50% { transform: translateY(-10px); } }
-
-    /* Video Section */
-    .video-section { text-align: center; padding: 3rem 1.5rem; }
-    .video-section p { margin-bottom: 1rem; color: #d4af37; font-style: italic; }
-    .video-section video {
-      max-width: 600px;
-      width: 100%;
-      border-radius: 12px;
-      background: #000;
-      box-shadow: 0 0 20px rgba(212,175,55,0.4);
-    }
-
-    /* Fallback for browsers without video support */
-    .video-section .fallback {
+    /* Dark mode */
+    body.dark {
+      background: #0a0a0a;
       color: #f5f5f5;
-      background: #111;
-      padding: 1rem;
-      border: 1px solid #d4af37;
-      border-radius: 8px;
-      max-width: 600px;
-      margin: auto;
-      text-align: center;
     }
+    body.dark header { background: linear-gradient(to right, #111, #0a0a0a); border-bottom: 2px solid rgba(212,175,55,0.4); }
+    body.dark section h2 { color: #d4af37; border-left-color: #c0c0c0; }
+    body.dark .video-section p { color: #d4af37; }
+    body.dark .video-section video { background: #000; box-shadow: 0 0 20px rgba(212,175,55,0.4); }
+    body.dark .socials a { background: linear-gradient(135deg, #d4af37, #c0c0c0); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
+    body.dark footer { background: #111; color: #888; border-top-color: rgba(192,192,192,0.3); }
+    body.dark #mode-toggle { background: #d4af37; color: #0a0a0a; }
+
+    /* Light mode */
+    body.light {
+      background: linear-gradient(135deg, #F2EAC7, #F0E3BD, #E3D4AE);
+      color: #333;
+    }
+    body.light header { background: linear-gradient(135deg, #F2DEB6, #F0E3BD, #E3C89C); border-bottom: 2px solid silver; }
+    body.light section h2 { color: #D3BE93; border-left-color: #E3C89C; }
+    body.light .video-section p { color: #D3BE93; }
+    body.light .video-section video { background: #E3D4AE; box-shadow: 0 0 20px rgba(192,192,192,0.5); }
+    body.light .socials a { background: silver; -webkit-background-clip: text; -webkit-text-fill-color: transparent; text-shadow: 0 0 3px #aaa; }
+    body.light footer { background: linear-gradient(135deg, #F2EAC7, #F2DEB6); color: #333; border-top-color: silver; }
+    body.light #mode-toggle { background: silver; color: #333; }
   </style>
 </head>
-
 <body>
+
+  <!-- Toggle Button with Sun/Moon -->
+  <button id="mode-toggle"><i class="fas fa-moon"></i></button>
 
   <header class="fade-in">
     <h1>His Psalms</h1>
@@ -122,19 +134,17 @@
     <h2>About</h2>
     <p>
       On this account, we post songs that are meant to praise and worship God.
-      I started this account after listening to the song Essence of Worship on the theme
-      ‘Shangilia’ where the singer mentions Psalm 150, saying ‘Let everything that has breath praise the Lord.’
+      I started this account after listening to the song Essence of Worship on the theme ‘Shangilia’
+      where the singer mentions Psalm 150, saying ‘Let everything that has breath praise the Lord.’
       I came up with the name HisPsalms because the Book of Psalms is full of songs written by King David to God.
     </p>
   </section>
 
   <section class="video-section fade-in">
     <p>Reason for His Psalms Account</p>
-
-    <!-- ✅ Compressed video with thumbnail + lazy load + fallback -->
-    <video controls playsinline poster="thumbnail.jpg" preload="metadata">
+    <video controls playsinline loading="lazy" poster="thumbnail.jpg">
       <source src="HIS.mp4" type="video/mp4">
-      <div class="fallback">Your browser does not support the video. <br> <a href="HIS.mp4" target="_blank" class="link-btn">Download Video</a></div>
+      Your browser does not support the video tag.
     </video>
   </section>
 
@@ -146,7 +156,6 @@
       Pia Nitamake sure kuwapostia zile sebene latest kama vile tu David alisifu God With new song.
       PIA WEWE BINA NA YESU.
     </p>
-
     <div class="socials">
       <a href="https://www.instagram.com/his_psalms?igsh=N21ldjN6eXkyMGdl" target="_blank"><i class="fab fa-instagram"></i></a>
       <a href="https://youtube.com/@his_psalms?si=ndEbQ1189A4LbGDm" target="_blank"><i class="fab fa-youtube"></i></a>
@@ -159,5 +168,26 @@
     © 2026 His Psalms. All rights reserved.
   </footer>
 
+  <script>
+    const toggle = document.getElementById('mode-toggle');
+    const icon = toggle.querySelector('i');
+    let currentMode = localStorage.getItem('mode') || 'dark';
+    document.body.classList.add(currentMode);
+    icon.className = currentMode === 'dark' ? 'fas fa-moon' : 'fas fa-sun';
+
+    toggle.addEventListener('click', () => {
+      if(document.body.classList.contains('dark')){
+        document.body.classList.replace('dark','light');
+        localStorage.setItem('mode','light');
+        icon.className = 'fas fa-sun';
+      } else {
+        document.body.classList.replace('light','dark');
+        localStorage.setItem('mode','dark');
+        icon.className = 'fas fa-moon';
+      }
+    });
+  </script>
+
 </body>
 </html>
+
